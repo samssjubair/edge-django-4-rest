@@ -10,6 +10,7 @@ django-extensions = "*"
 psycopg2-binary = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,16 +85,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('SQLITE_ENGINE'),
+        'NAME': BASE_DIR / os.getenv('SQLITE_NAME'),
     }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'railway',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'YvMqRUPZPtUEBzTfbGmYHncVOBNlgbwQ',
-    #     'HOST': 'shortline.proxy.rlwy.net',
-    #     'PORT': '46301'
+    #     'ENGINE': os.getenv('ENGINE'),
+    #     'NAME': os.getenv('NAME'),
+    #     'USER': os.getenv('USER'),
+    #     'PASSWORD': os.getenv('PASSWORD'),
+    #     'HOST': os.getenv('HOST'),
+    #     'PORT': os.getenv('PORT')
     # }
 }
 
@@ -140,7 +144,19 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ]
+    ],
+    # write default pagination here for all apis
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+     'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',
+        'user': '10/minute'
+    }
+   
 }
 
 SIMPLE_JWT = {
