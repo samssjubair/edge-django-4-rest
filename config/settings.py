@@ -86,18 +86,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('SQLITE_ENGINE'),
-        'NAME': BASE_DIR / os.getenv('SQLITE_NAME'),
-    }
     # 'default': {
-    #     'ENGINE': os.getenv('ENGINE'),
-    #     'NAME': os.getenv('NAME'),
-    #     'USER': os.getenv('USER'),
-    #     'PASSWORD': os.getenv('PASSWORD'),
-    #     'HOST': os.getenv('HOST'),
-    #     'PORT': os.getenv('PORT')
+    #     'ENGINE': os.getenv('SQLITE_ENGINE'),
+    #     'NAME': BASE_DIR / os.getenv('SQLITE_NAME'),
     # }
+    'default': {
+        'ENGINE': os.getenv('ENGINE'),
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT')
+    }
 }
 
 # postgresql://postgres:YvMqRUPZPtUEBzTfbGmYHncVOBNlgbwQ@shortline.proxy.rlwy.net:46301/railway
